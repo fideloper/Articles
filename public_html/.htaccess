@@ -1,0 +1,8 @@
+SetEnv APP_ENV development
+
+Options -Indexes
+
+RewriteEngine On
+RewriteCond $1 \.(md|markdown)$ [NC]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*)$ /index.php?r=$1 [L]
