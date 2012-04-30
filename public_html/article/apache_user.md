@@ -1,0 +1,1 @@
+Change user apache is run in with envvars file. Change is good for development. I have apache run as the person I log in with samba. Web files and Git user SSH keys are all under that username.

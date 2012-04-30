@@ -23,6 +23,12 @@ All code and content is found on [Github](https://github.com/fideloper/How-EE-Wo
 
 ***
 
+## [Markdown API](https://github.com/fideloper/Markdown-api)
+
+This is a `Node.js` project built on `Express.js`. It is a simple API which returns HTML based on Markdown, and as parsed by [PHP-Markdown](https://github.com/michelf/php-markdown). Possibly soon to implement the Extra branch and other features missing in the PHP Marker processors. See also [supporting website](https://github.com/fideloper/Markdown-web) project.
+
+***
+
 ## [Node Remote Control](https://github.com/fideloper/node-remotecontrol)
 
 A `Node.js` proof-of-concept which allows a user to connect to the site (hopefully on their smart phone) and control a video being displayed. Using Node.js, Express.js, Socket.io and the `Vimeo Froogloop API`, a user can connect to, start, stop and reload a video.
