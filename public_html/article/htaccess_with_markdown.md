@@ -35,25 +35,36 @@ The power of using `.htaccess` in this manner is that it will still responsd wit
 
 You can use this method to display the content in a template:
 
-```
-<?php
-	$final_content = '<p>Something went wrong!</p>';
+	<?php
+		$final_content = '<p>Something went wrong!</p>';
 		
-	if(isset($_GET['file'])) {
-		$content = file_get_contents($_GET['file']);
+		if(isset($_GET['file'])) {
+			$content = file_get_contents($_GET['file']);
 			
-		if($content !== FALSE) {
-			$final_content = $markdown->parse($content);
-		}
-	} ?><!doctype html>
-<html>
-	<head>My Site</head>
-	<body>
-		<header>Welcome to My Site</header>
-		<article>
-			<?php echo $final_content; ?>
-		</article>
-		<footer>Thanks for visiting!</footer>
-	</body>
-</html>
-```
+			if($content !== FALSE) {
+				$final_content = $markdown->parse($content);
+			}
+		} ?><!doctype html>
+	<html>
+		<head>My Site</head>
+		<body>
+			<header>Welcome to My Site</header>
+			<article>
+				<?php echo $final_content; ?>
+			</article>
+			<footer>Thanks for visiting!</footer>
+		</body>
+	</html>
+
+
+Note, if you're using nginx, here's a near approximate:
+
+***your-site.conf***
+
+        location / {
+                try_files $uri /index.php;
+        }
+
+        location /article {
+                rewrite ^ /index.php?r=$uri last;
+        }
