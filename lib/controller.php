@@ -1,24 +1,26 @@
 <?php
 
-require_once(LIB_PATH . 'markdown.php');
+require_once(LIB_PATH . 'template.php');
+require_once(LIB_PATH . 'article.php');
 
 //Routes: Home page OR article
 
 class Controller {
 	
-	//Template variables (Abstract to __get, __set)
-	public $title;
-	public $content;
-	
 	private $_article;
+	private $_template;
+	private $_config;
 	
 	public function __construct() {
-		
+		$this->_article = new Article();
+		$this->_template = new Template();
+		$this->_config = Application::instance()->getConfig()->set('defaultView', 'index.md');
 	}
 	
 	public function parseRequest() {
 		if(!isset($_GET['r'])) {
-			$this->_article = 'index.md';
+			$this->_article->title = '';
+			$this->_article->setPath(ART_PATH . $this->_config->get('defaultView'));
 			return $this;
 		}
 		
@@ -27,11 +29,12 @@ class Controller {
 		$segLength = count($segments);
 		
 		if($segLength > 1) {
-			$this->_article = $segments[count($segments) - 1];
+			$this->_article->title = ucwords(str_replace('_', ' ', str_replace('.md', '', basename($this->_article->path)))) . ' | ';
+			$this->_article->setPath(ART_PATH . $segments[count($segments) - 1]);
 			return $this;
 		} else {
 			//Good candidate for a 404
-			$this->_article = 'index.md';
+			$this->_article->setPath(ART_PATH . $this->_config->get('defaultView'));
 			return $this;
 		}
 		
@@ -39,25 +42,12 @@ class Controller {
 	}
 	
 	public function render() {
-		if($this->_article === 'index.md') {
-			$this->title = '';
-			$this->content = Markdown(file_get_contents(ART_PATH . 'index.md'));
-		} else {
-			$this->title = ucwords(str_replace('_', ' ', str_replace('.md', '', $this->_article))) . ' | ';
-			$this->content = Markdown(file_get_contents(ART_PATH . $this->_article));
-		}
-		
-		ob_start();
-        
-        include(APP_PATH . 'template/index.php');
-
-        echo ob_get_clean();
-        
+		echo $this->_template->setArticle($this->_article->render())->render();
         return $this;
 	}
 	
-	public function redirect($path) {
-		header('Location: ' . $path);
+	public function redirect($url) {
+		header('Location: ' . $url);
 		exit(0);
 	}
 	

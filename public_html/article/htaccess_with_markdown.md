@@ -1,3 +1,4 @@
+<!-- Date: April 27, 2012 -->
 # An Interesting Use of .htaccess
 
 I enjoy using [Markdown](http://daringfireball.net/projects/markdown/) as a tool to publish to the web. I often use Markdown files to power the content of my sites.

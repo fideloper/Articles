@@ -1,6 +1,7 @@
+<!-- Date: April 28, 2012 --->
 # Why I Love Markdown
 
-Markdown is a simple syntax anyone can use to generate valid HTML. It uses plain-text in combination with characters such as hashes, tick marks, spaces, tabs and numbers. A writer can use this system to create a text file which is readable and understandable in itself, and see it produce clean, valid HTML.
+Markdown is a simple syntax anyone can use to generate valid HTML. It uses plain-text in combination with characters such as hashes, tick marks, spaces, tabs and numbers. A writer can use this system to create a text file which is readable and understandable in itself, and then see it produce clean, valid HTML.
 
 ## Not just another WYSIWYG
 

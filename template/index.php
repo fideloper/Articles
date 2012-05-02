@@ -20,6 +20,7 @@
         </p>
       </header>
       <section>
+        <?php if($this->date !== '') : ?><time><?php echo $this->date; ?></time><?php endif; ?>
         <?php echo $this->content?>
       </section>
       <footer>
